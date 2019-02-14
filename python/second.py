@@ -1,3 +1,5 @@
+# Note from Wes - I'm going to convert this into a better format soon.
+
 # understand the problem
     # look for keywords like "takes", "given", "accepts"
     # get to the core of function structure
