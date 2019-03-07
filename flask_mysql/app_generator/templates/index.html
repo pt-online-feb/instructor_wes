@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" 
+   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+  <link rel="stylesheet" type="text/css" 
+   href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Success! Hello, {{ email }}</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li class="error">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    {% endwith %}
+    <h2>Add a new app name</h2>
+    <form action="/app_names/create" method="post">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="">
+      <input type="submit" value="Add Name">
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>app_name</th>
+          <th>creator_id</th>
+          <th>actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for app_name in app_names %}
+          <tr>
+            <td>{{ app_name['id'] }}</td>
+            <td>{{ app_name['name'] }}</td>
+            <td>{{ app_name['user_id'] }}</td>
+            {% if session['user_id'] == app_name['user_id'] %}
+              <td>
+                <a href="#" class="button">Edit</a>
+                <a href="#" class="button">Delete</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
