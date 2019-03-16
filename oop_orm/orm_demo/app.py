@@ -19,8 +19,12 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())    # notice the extra import statement above
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
+    def __repr__(self):
+        return f"<User username: {self.username}>"
+
 class Tweet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     stuff = db.Column(db.String(240))
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     author = db.relationship('User', foreign_keys=[author_id], backref="tweets", cascade="all")
+
