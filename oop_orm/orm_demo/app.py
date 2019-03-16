@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from sqlalchemy.sql import func
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -28,3 +28,12 @@ class Tweet(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     author = db.relationship('User', foreign_keys=[author_id], backref="tweets", cascade="all")
 
+@app.route('/')
+def index():
+    return render_template(
+        'index.html',
+        user_list=User.query.all()
+    )
+
+if __name__ == "__main__":
+    app.run(debug=True)
