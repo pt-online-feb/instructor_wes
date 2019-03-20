@@ -1,0 +1,7 @@
+.forms-wrapper {
+  display: flex;
+}
+
+.error {
+  color: red;
+}
