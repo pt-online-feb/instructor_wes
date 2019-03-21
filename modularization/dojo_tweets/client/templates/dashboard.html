@@ -1,0 +1,31 @@
+{% extends './layout.html' %}
+{% block title %}Tweets Dashboard{% endblock %}
+{% block body %}
+  <div class="add-tweet-container">
+    <h2>Write a Tweet:</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li class="error">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('tweets:create') }}" method="post">
+      <textarea name="content" cols="30" rows="10" placeholder="Your tweet here..."></textarea>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <div class="feed">
+    <h2>Your Feed:</h2>
+    <div class="tweets">
+      {% for tweet in tweets %}
+        <div class="tweet">
+          <h3>{{ tweet.user.first_name }} {{ tweet.user.last_name }} says:</h3>
+          <p>{{ tweet.content }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
