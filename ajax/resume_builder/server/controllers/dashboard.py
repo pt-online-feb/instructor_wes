@@ -14,8 +14,4 @@ def dashboard():
     current_user = User.query.get(session['user_id'])
     resume_items = ResumeItem.query.filter_by(user_id=session['user_id']).all()
 
-    return render_template(
-        'dashboard.html',
-        user=current_user,
-        resume_items=resume_items
-    )
+    return render_template('dashboard.html')

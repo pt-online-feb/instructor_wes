@@ -8,13 +8,22 @@
    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" type="text/css" 
    href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <script 
+   src="https://code.jquery.com/jquery-3.2.1.min.js" 
+   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" 
+   crossorigin="anonymous"></script>
+  <script>
+    var CURRENT_USER_ID = {{ session['user_id'] }};
+  </script>
+  <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
   <title>Resume Builder | Home</title>
 </head>
 <body>
   <div class="container">
-    <h1>Hello, {{ user.first_name }}</h1>
+    <h1>Hello, <span id="user-first-name"></span></h1>
     <h2>Add a new resume item</h2>
-    <form action="{{ url_for('resume_items:create') }}" method="post">
+    <div id="errors"></div>
+    <form action="{{ url_for('resume_items:create') }}" method="post" id="item-create-form">
       <label for="content_type">Content Type</label>
       <select name="content_type" id="content_type">
         <option value="JOB">Job</option>
@@ -32,7 +41,7 @@
       <input type="submit" value="Add Experience">
     </form>
     <h2>Current resume items</h2>
-    {{ resume_items }}
+    <div id="resume-items"></div>
   </div>
 </body>
 </html>

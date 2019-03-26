@@ -25,3 +25,7 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for("users:new"))
+
+def first_name():
+    user = User.query.get(session['user_id'])
+    return user.first_name
